@@ -23,5 +23,21 @@ class DriverProvider with ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+
+    //DELETE
+
+    Future<void> deleteDriver(String driverId) async {
+      _isLoading = true;
+      notifyListeners();
+
+      bool success = await _driverService.deleteDriver(driverId);
+
+      if (success) {
+        _driverList?.removeWhere((driver) => driver.id == driverId);
+      }
+
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }

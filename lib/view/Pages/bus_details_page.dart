@@ -179,7 +179,7 @@ class _BusDetailsState extends State<BusDetails> {
           children: [
             Container(
               margin: const EdgeInsets.all(20),
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               height: 160,
               width: double.infinity,
               decoration: BoxDecoration(
@@ -190,7 +190,7 @@ class _BusDetailsState extends State<BusDetails> {
                 children: [
                   Text(
                     widget.driverName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       color: Colors.white,
                     ),
@@ -200,7 +200,7 @@ class _BusDetailsState extends State<BusDetails> {
                     children: [
                       Text(
                         widget.drivingLicence,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 10,
                           color: Colors.white,
                         ),
@@ -215,28 +215,34 @@ class _BusDetailsState extends State<BusDetails> {
                 ],
               ),
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.5,
-              child: SingleChildScrollView(
-                child: SeatLayoutWidget(
-                  onSeatStateChanged: (rowI, colI, seatState) {
-                    if (seatState == SeatState.selected) {
-                      selectedSeats.add(SeatNumber(rowI: rowI, colI: colI));
-                    } else {
-                      selectedSeats.remove(SeatNumber(rowI: rowI, colI: colI));
-                    }
-                  },
-                  stateModel: SeatLayoutStateModel(
-                    rows: 7,
-                    cols: 5,
-                    seatSvgSize: 50,
-                    pathSelectedSeat: 'assets/seat.svg',
-                    pathDisabledSeat: 'assets/seat.svg',
-                    pathSoldSeat: 'assets/seat.svg',
-                    pathUnSelectedSeat: 'assets/seat.svg',
-                    currentSeatsState:
-                        widget.isTwoIntoTwo ? twoIntoTwo : oneIntoThree,
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 50.0,
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: SingleChildScrollView(
+                  child: SeatLayoutWidget(
+                    onSeatStateChanged: (rowI, colI, seatState) {
+                      if (seatState == SeatState.selected) {
+                        selectedSeats.add(SeatNumber(rowI: rowI, colI: colI));
+                      } else {
+                        selectedSeats
+                            .remove(SeatNumber(rowI: rowI, colI: colI));
+                      }
+                    },
+                    stateModel: SeatLayoutStateModel(
+                      rows: 7,
+                      cols: 5,
+                      seatSvgSize: 50,
+                      pathSelectedSeat: 'assets/seat.svg',
+                      pathDisabledSeat: 'assets/seat.svg',
+                      pathSoldSeat: 'assets/seat.svg',
+                      pathUnSelectedSeat: 'assets/seat.svg',
+                      currentSeatsState:
+                          widget.isTwoIntoTwo ? twoIntoTwo : oneIntoThree,
+                    ),
                   ),
                 ),
               ),

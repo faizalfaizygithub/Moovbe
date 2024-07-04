@@ -26,5 +26,19 @@ class DriverService {
     }
   }
 
-  //drivers service
+  //drivers DELETE
+
+  Future<bool> deleteDriver(String driverId) async {
+    final response = await http.delete(
+      Uri.parse('$_baseUrl/DriverApi/$driverId'),
+      headers: _headers,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print('Failed to delete driver: ${response.reasonPhrase}');
+      return false;
+    }
+  }
 }

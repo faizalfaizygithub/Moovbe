@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            appBarTheme: AppBarTheme(
+            appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.black87,
                 foregroundColor: Colors.white,
                 titleTextStyle: TextStyle(
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.w500),
                 centerTitle: true)),
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

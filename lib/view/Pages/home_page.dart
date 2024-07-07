@@ -48,7 +48,9 @@ class HomePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: CustomBox(
-                      ontap: () {
+                      ontap: () async {
+                        // await context.read<DriverProvider>().fetchDriverList();
+
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return DriverPage();

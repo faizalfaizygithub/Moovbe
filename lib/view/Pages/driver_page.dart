@@ -11,21 +11,23 @@ class DriverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final driverProvider = Provider.of<DriverProvider>(context);
+
     return driverProvider.isLoading
         ? const Center(
             child: CircularProgressIndicator(),
           )
         : Scaffold(
             appBar: AppBar(
-              title: const Text(
-                'Driver List',
+              title: const Text('Driver List'),
+            ),
+            body: Consumer<DriverProvider>(
+              builder: (context, value, child) => ListView.builder(
+                itemCount: value.driverList!.length,
+                itemBuilder: (context, index) {
+                  return DriverTile(driver: value.driverList![index]);
+                },
               ),
             ),
-            body: ListView.builder(
-                itemCount: driverProvider.driverList!.length ?? 0,
-                itemBuilder: (context, index) {
-                  return DriverTile(driver: driverProvider.driverList![index]);
-                }),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: CustomButton(

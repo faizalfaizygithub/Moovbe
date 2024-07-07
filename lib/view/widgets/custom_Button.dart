@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:round3/controller/Provider/driver_provider.dart';
 
 class CustomButton extends StatelessWidget {
   final String txt;
@@ -15,6 +17,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<DriverProvider>(context);
     return GestureDetector(
       onTap: ontap,
       child: Container(
@@ -24,11 +27,17 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
             color: buttonColor, borderRadius: BorderRadius.circular(10)),
         child: Center(
-          child: Text(
-            txt,
-            style: TextStyle(
-                color: txtColor, fontSize: 12, fontWeight: FontWeight.w500),
-          ),
+          child: provider.isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Text(
+                  txt,
+                  style: TextStyle(
+                      color: txtColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500),
+                ),
         ),
       ),
     );

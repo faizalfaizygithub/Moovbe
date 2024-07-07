@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:round3/controller/Provider/driver_provider.dart';
+import 'package:round3/view/Pages/driver_page.dart';
 import 'package:round3/view/widgets/custom_Button.dart';
 import 'package:round3/view/widgets/custom_Textfield.dart';
 
@@ -13,12 +16,12 @@ class AddDriverPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Driver'),
+        title: const Text('Add Driver'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             CustomTextField(hintText: 'Enter Name', controller: nameController),
@@ -32,7 +35,13 @@ class AddDriverPage extends StatelessWidget {
             ),
             CustomButton(
               txt: 'Save',
-              ontap: () {},
+              ontap: () {
+                context.read<DriverProvider>().addDriver(nameController.text,
+                    mobileController.text, licenseController.text);
+
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DriverPage()));
+              },
               txtColor: Colors.white,
               buttonColor: Colors.red,
             )

@@ -60,23 +60,19 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 100,
                 ),
-                loginProvider.isLoading
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : CustomButton(
-                        txtColor: Colors.white,
-                        buttonColor: Colors.red,
-                        txt: 'Login',
-                        ontap: () async {
-                          if (formKey.currentState!.validate()) {
-                            await loginProvider.loginUser(
-                              username: usernameController.text,
-                              password: passwordController.text,
-                              context: context,
-                            );
-                          }
-                        }),
+                CustomButton(
+                    txtColor: Colors.white,
+                    buttonColor: Colors.red,
+                    txt: 'Login',
+                    ontap: () async {
+                      if (formKey.currentState!.validate()) {
+                        await loginProvider.loginUser(
+                          username: usernameController.text,
+                          password: passwordController.text,
+                          context: context,
+                        );
+                      }
+                    }),
               ],
             ),
           ),
